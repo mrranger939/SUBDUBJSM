@@ -5,13 +5,13 @@ const subscriptionSchema = new mongoose.Schema(
     name: {
       type: String,
       required: [true, "Subscription name is required"],
-      trime: true,
+      trim: true,
       minLength: 2,
       maxLength: 100,
     },
     price: {
       type: Number,
-      required: [true, "Subsvription price is required"],
+      required: [true, "Subscription price is required"],
       min: [0, "Price must be greater than 0"],
     },
     currency: {
@@ -51,15 +51,17 @@ const subscriptionSchema = new mongoose.Schema(
       type: Date,
       required: true,
       validate: {
-        validator: (value) => value <= new Date(),
-        message: "Start date must be in the past",
+        validator: function(value){
+          return value<=new Date();
+        },
+        message: "Start date must be in the past", 
       },
     },
     renewalDate: {
       type: Date,
       required: true,
       validate: {
-        validators: function (value) {
+        validator: function (value) {
           return value > this.startDate;
         },
         message: "Renewal date must be after start date",
@@ -82,11 +84,11 @@ subscriptionSchema.pre("save", function (next) {
       daily: 1,
       weekly: 7,
       monthly: 30,
-      yearly: 305,
+      yearly: 365,
     };
     this.renewalDate = new Date(this.startDate);
     this.renewalDate.setDate(
-      this.renewalDate.getDate() + this.renewalPeriods[this.frequency]
+      this.renewalDate.getDate() + renewalPeriods[this.frequency]
     );
   }
   if (this.renewalDate < new Date()) {
@@ -94,3 +96,6 @@ subscriptionSchema.pre("save", function (next) {
   }
   next();
 });
+
+const Subscription = mongoose.model('Subscription', subscriptionSchema);
+export default Subscription
