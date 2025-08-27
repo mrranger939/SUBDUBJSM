@@ -1,0 +1,37 @@
+api -> signup: http://localhost:5000/api/v1/auth/sign-up  {POST}
+Body:
+{
+  "name": "Aakif Ahmad Mir",
+  "email": "aakifofficial@gmail.com",
+  "password": "1234"
+}
+
+api -> signin : http://localhost:5000/api/v1/auth/sign-in {POST}
+Body:
+{
+  "email": "aakifofficial@gmail.com",
+  "password": "1234"
+}
+Copy the token and then add to Authentication bearer token in Auth
+example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGF
+lZTZlNDBmMjdiNTdjMWE0YzJjY2UiLCJpYXQiOjE3NTYyOTI5MDQsImV4cCI6MTc1
+NjM3OTMwNH0.S20-vSO3tCTAxTNncoDrqBCi570EQun9-4m_Nf4kKRc
+
+api -> All Users: http://localhost:5000/api/v1/users {GET}
+
+api -> Users by Id: http://localhost:5000/api/v1/users/68aee6e40f27b57c1a4c2cce {GET}
+
+api -> Subscription: http://localhost:5000/api/v1/subscriptions {POST}
+Body:
+{
+  "name": "Netflix",
+  "price": 169.99,
+  "currency": "USD",
+  "frequency":"daily",
+  "category": "entertainment",
+  "startDate": "2025-08-27T00:00:00.000Z",
+  "paymentMethod": "Credit Card"
+}
+
+and many more API's to get specific users and subscriptions too 
+please do explore the project
